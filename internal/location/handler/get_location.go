@@ -17,6 +17,18 @@ func NewGetLocationHandler(c service.LocationCalculator) GetLocationHandler {
 	return GetLocationHandler{locationCalculator: c}
 }
 
+// GetLocation godoc
+// @Router /location [get]
+// @Summary Retrieves storages location by drones coordinates and velocity
+// @Produce json
+//
+// @Param x query number false "x coordinate"
+// @Param y query number false "y coordinate"
+// @Param z query number false "z coordinate"
+// @Param vel query number false "drone velocity"
+//
+// @Success 200 {object} dto.GetLocationResponse
+// @Failure 400 {object} httpUtil.ErrorResponse
 func (h GetLocationHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	req, err := dto.NewGetLocationRequest(r)

@@ -1,0 +1,40 @@
+basePath: /api/v1
+definitions:
+  dto.GetLocationResponse:
+    properties:
+      loc:
+        type: number
+    type: object
+info:
+  contact: {}
+  title: Drone Navigation System
+  version: "1.0"
+paths:
+  /location:
+    get:
+      parameters:
+      - description: x coordinate
+        in: query
+        name: x
+        type: number
+      - description: y coordinate
+        in: query
+        name: "y"
+        type: number
+      - description: z coordinate
+        in: query
+        name: z
+        type: number
+      - description: drone velocity
+        in: query
+        name: vel
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetLocationResponse'
+      summary: Retrieves storages location by drones coordinates and velocity
+swagger: "2.0"

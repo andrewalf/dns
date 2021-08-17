@@ -27,3 +27,7 @@ thanos_snap:
 	docker rmi $(shell docker images -q dns_image) && \
 	docker rmi $(shell docker images -q alpine:3.14) && \
 	docker rmi $(shell docker images -q golang:1.16)
+
+.PHONY: doc
+doc:
+	 swag init --dir ./cmd --parseDependency -o ./api/openapi

@@ -1,0 +1,63 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Drone Navigation System",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/location": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Retrieves storages location by drones coordinates and velocity",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "description": "x coordinate",
+                        "name": "x",
+                        "in": "query"
+                    },
+                    {
+                        "type": "number",
+                        "description": "y coordinate",
+                        "name": "y",
+                        "in": "query"
+                    },
+                    {
+                        "type": "number",
+                        "description": "z coordinate",
+                        "name": "z",
+                        "in": "query"
+                    },
+                    {
+                        "type": "number",
+                        "description": "drone velocity",
+                        "name": "vel",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.GetLocationResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.GetLocationResponse": {
+            "type": "object",
+            "properties": {
+                "loc": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}
