@@ -9,6 +9,7 @@
 - `make test` - run tests
 
 `http://localhost:<port>/api/v1/location` - endpoint
+
 `http://localhost:<port>/swagger/index.html` - openapi documentation
 
 ## Decisions made
