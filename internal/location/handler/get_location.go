@@ -29,6 +29,7 @@ func NewGetLocationHandler(c service.LocationCalculator) GetLocationHandler {
 //
 // @Success 200 {object} dto.GetLocationResponse
 // @Failure 400 {object} httpUtil.ErrorResponse
+// @Failure 500 {object} httpUtil.ErrorResponse
 func (h GetLocationHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	req, err := dto.NewGetLocationRequest(r)
@@ -40,7 +41,11 @@ func (h GetLocationHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		httpUtil.HandleValidationError(w, err)
 		return
 	}
-	loc := h.locationCalculator.Calculate(req)
+	loc, err := h.locationCalculator.Calculate(req)
+	if err != nil {
+		httpUtil.HandleServerError(w, err)
+		return
+	}
 	res := dto.GetLocationResponse{Location: loc}
 	if err := httpUtil.WriteJson(w, res); err != nil {
 		fmt.Printf(errUtil.HttpResponseError+"\n", err)

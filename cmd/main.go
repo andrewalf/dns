@@ -20,14 +20,17 @@ var port int
 
 // port and sectorID are passed as env variable for docker container
 func init() {
+	var e error
 	rawSectorID := os.Getenv("SECTOR_ID")
 	if rawSectorID == "" {
 		log.Fatal("sectorID must be specified")
 	}
-	var e error
 	sectorID, e = strconv.Atoi(rawSectorID)
 	if e != nil {
 		log.Fatal("sectorID must be integer")
+	}
+	if sectorID <= 0 {
+		log.Fatal("sectorID must be >= 0")
 	}
 	rawPort := os.Getenv("DNS_PORT")
 	if rawPort == "" {
@@ -36,6 +39,9 @@ func init() {
 	port, e = strconv.Atoi(rawPort)
 	if e != nil {
 		log.Fatal("port must be integer")
+	}
+	if port <= 0 {
+		log.Fatal("port must be >= 0")
 	}
 }
 
