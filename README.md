@@ -38,9 +38,9 @@ correct coordinates received and drone moves to correct position.
 - api - swagger specification
 - build - all for docker
 - cmd - entrypoints to application, binaries are compiled from here
-- internal - application code, forbidden fir importing by other packages
+- internal - application code, forbidden for importing by other packages
     - location - location domain, if we'll need drone management we'll create next to it a drone
-    directory. This directory will contain all drone relaret code: handlers, dto, entities, services etc.
+    directory. This directory will contain all drone related code: handlers, dto, entities, services etc.
         - dto
         - handler
         - service
